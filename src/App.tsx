@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { Routes, Route } from 'react-router-dom';
+import { PokemonsLayout } from './pages/PokemonsLayout';
+import { Home } from './pages/home/Home';
+import { Types } from './pages/types/Types';
+import { SearchResult } from './pages/searchResult/SearchResult';
+import { Navigate } from 'react-router-dom';
+import { Page404 } from './pages/Page404/Page404';
+
+const App: React.FC=()=> {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Routes>
+      <Route path='/' element={<PokemonsLayout/>}>
+        <Route index element={<Home/>} />
+        <Route path='/:type' element={<Types/>}/>
+        <Route path='/search/:q' element={<SearchResult/>} />
+        <Route path='/404' element={<Page404/>}/>
+        <Route path='*' element={<Navigate to='/'/>}/>
+      </Route>
+    </Routes>
+    </>
   );
 }
 
