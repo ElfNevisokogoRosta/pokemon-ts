@@ -3,10 +3,12 @@ import { IPokemonComponent, IPokemonType } from '../../../../utils/interafece'
 import { usePokemonLoad } from '../../../../utils/usePokemonLoad'
 import {StatTitle,StatsDis,Element, Title, Image, TypeList, TypeElement, TypeText, StatsList, StatsElement} from '../../style/Pokemon.styled'
 import { ColorRing } from 'react-loader-spinner'
+import { useNavigate } from 'react-router-dom'
 
 export const Pokemon: React.FC<IPokemonComponent> = ({url}) => {
   const [loading, error, data] = usePokemonLoad(url ?? '');
   const {name , img , type, stats} = data;
+  const navigate = useNavigate();
   const themeChecker = (type: IPokemonType[] | undefined) => {
     if (type === undefined || type.length === 0) {
       return 'default';
@@ -21,7 +23,7 @@ export const Pokemon: React.FC<IPokemonComponent> = ({url}) => {
     <div><ColorRing/></div>
   }
   return (
-    <Element theme={theme}>
+    <Element theme={theme} onClick={()=>{navigate(`/search/${name}`)}}>
       <Title>{name}</Title>
       <Image src={img} alt={name} />
       <TypeList>

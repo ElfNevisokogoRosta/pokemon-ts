@@ -32,6 +32,7 @@ const Button = styled.button`
     color: #173EA5;
     border: 2px solid #173EA5;
   }
+  margin-bottom: 30px;
 `
 
 export {Container, Button}
